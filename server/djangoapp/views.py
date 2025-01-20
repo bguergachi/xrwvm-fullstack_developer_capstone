@@ -22,7 +22,8 @@ def get_cars(request):
     if count == 0:
         initiate()
     car_models = CarModel.objects.select_related('car_make')
-    cars = [{"CarModel": car_model.name, "CarMake": car_model.car_make.name} for car_model in car_models]
+    cars = [{"CarModel": car_model.name, "CarMake": car_model.car_make.name}
+            for car_model in car_models]
     return JsonResponse({"CarModels": cars})
 
 
@@ -37,7 +38,6 @@ def login_user(request):
         return JsonResponse({"status": 200, "message": "Login successful"})
     else:
         return JsonResponse({"status": 401, "message": "Invalid username or password"})
-
 
 
 def logout_request(request):

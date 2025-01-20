@@ -40,4 +40,3 @@ urlpatterns = [
     # path for get cars view
     path(route='get_cars', view=views.get_cars, name='getcars'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
