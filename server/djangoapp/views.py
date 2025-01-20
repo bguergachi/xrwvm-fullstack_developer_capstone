@@ -37,8 +37,8 @@ def login_user(request):
         login(request, user)
         return JsonResponse({"status": 200, "message": "Login successful"})
     else:
-        return JsonResponse({"status": 401, 
-                             "message": "Invalid username or password"})
+        return JsonResponse({"status": 401,
+                            "message": "Invalid username or password"})
 
 
 def logout_request(request):
@@ -64,7 +64,7 @@ def registration(request):
         login(request, user)
         return JsonResponse({"userName": username, "status": "Authenticated"})
     else:
-        return JsonResponse({"userName": username, 
+        return JsonResponse({"userName": username,
                              "error": "Already Registered"})
 
 
@@ -102,8 +102,8 @@ def add_review(request):
             post_review(data)
             return JsonResponse({"status": 200})
         except Exception:
-            return JsonResponse({"status": 401, "message": "Error in posting review"})
+            return JsonResponse({"status": 401,
+                                "message": "Error in posting review"})
     else:
-        return JsonResponse({"status": 403, 
+        return JsonResponse({"status": 403,
                              "message": "Unauthorized"})
-
