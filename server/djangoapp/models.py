@@ -1,7 +1,7 @@
 # Uncomment the following imports before adding the Model code
 from django.db import models
 from django.utils.timezone import now
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core import validators
 
 
 # Create your models here.
@@ -17,7 +17,12 @@ class CarMake(models.Model):
     headquarters = models.CharField(max_length=100)
     website = models.URLField()
     country_of_origin = models.CharField(max_length=100)
-    established_year = models.IntegerField(validators=[MinValueValidator(1800), MaxValueValidator(now().year)])
+    established_year = models.IntegerField(
+        validators=[
+            validators.MaxValueValidator(now().year),
+            validators.MinValueValidator(1800)
+        ]
+    )
     
     def __str__(self):
         return self.name  # Return the name as the string representation
@@ -45,12 +50,18 @@ class CarModel(models.Model):
         ('TRUCK', 'Truck'),
         ('VAN', 'Van'),
     ]
-    type = models.CharField(max_length=20, choices=CAR_TYPES, default='SUV')
-    year = models.IntegerField(default=2023,
+    type = models.CharField(
+        max_length=20,
+        choices=CAR_TYPES,
+        default='SUV'
+    )
+    year = models.IntegerField(
+        default=2023,
         validators=[
-            MaxValueValidator(2023),
-            MinValueValidator(2015)
-        ])
+            validators.MaxValueValidator(2023),
+            validators.MinValueValidator(2015)
+        ]
+    )
     color = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     horsepower = models.IntegerField()
@@ -59,3 +70,4 @@ class CarModel(models.Model):
 
     def __str__(self):
         return self.name  # Return the name as the string representation
+
