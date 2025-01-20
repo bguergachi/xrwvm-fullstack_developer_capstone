@@ -37,7 +37,8 @@ def login_user(request):
         login(request, user)
         return JsonResponse({"status": 200, "message": "Login successful"})
     else:
-        return JsonResponse({"status": 401, "message": "Invalid username or password"})
+        return JsonResponse({"status": 401, 
+                             "message": "Invalid username or password"})
 
 
 def logout_request(request):
@@ -63,8 +64,8 @@ def registration(request):
         login(request, user)
         return JsonResponse({"userName": username, "status": "Authenticated"})
     else:
-        return JsonResponse({"userName": username, "error": "Already Registered"})
-
+        return JsonResponse({"userName": username, 
+                             "error": "Already Registered"})
 
 
 def get_dealerships(request, state="All"):
@@ -85,7 +86,6 @@ def get_dealer_reviews(request, dealer_id):
         return JsonResponse({"status": 400, "message": "Bad Request"})
 
 
-
 def get_dealer_details(request, dealer_id):
     if dealer_id:
         endpoint = f"/fetchDealer/{dealer_id}"
@@ -93,7 +93,6 @@ def get_dealer_details(request, dealer_id):
         return JsonResponse({"status": 200, "dealer": dealership})
     else:
         return JsonResponse({"status": 400, "message": "Bad Request"})
-
 
 
 def add_review(request):
@@ -105,4 +104,6 @@ def add_review(request):
         except Exception:
             return JsonResponse({"status": 401, "message": "Error in posting review"})
     else:
-        return JsonResponse({"status": 403, "message": "Unauthorized"})
+        return JsonResponse({"status": 403, 
+                             "message": "Unauthorized"})
+
