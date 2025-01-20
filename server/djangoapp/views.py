@@ -1,5 +1,6 @@
 # Uncomment the required imports before adding the code
 
+from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.contrib.auth import login, logout, authenticate
 import logging
@@ -38,6 +39,7 @@ def login_user(request):
         return JsonResponse({"status": 401, "message": "Invalid username or password"})
 
 
+
 def logout_request(request):
     logout(request)
     return JsonResponse({"userName": ""})
@@ -64,6 +66,7 @@ def registration(request):
         return JsonResponse({"userName": username, "error": "Already Registered"})
 
 
+
 def get_dealerships(request, state="All"):
     endpoint = "/fetchDealers" if state == "All" else f"/fetchDealers/{state}"
     dealerships = get_request(endpoint)
@@ -82,6 +85,7 @@ def get_dealer_reviews(request, dealer_id):
         return JsonResponse({"status": 400, "message": "Bad Request"})
 
 
+
 def get_dealer_details(request, dealer_id):
     if dealer_id:
         endpoint = f"/fetchDealer/{dealer_id}"
@@ -89,6 +93,7 @@ def get_dealer_details(request, dealer_id):
         return JsonResponse({"status": 200, "dealer": dealership})
     else:
         return JsonResponse({"status": 400, "message": "Bad Request"})
+
 
 
 def add_review(request):
@@ -101,4 +106,3 @@ def add_review(request):
             return JsonResponse({"status": 401, "message": "Error in posting review"})
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})
-
