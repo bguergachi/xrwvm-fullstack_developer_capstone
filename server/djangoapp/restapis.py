@@ -15,6 +15,7 @@ backend_url = os.getenv('backend_url', default="http://localhost:3030")
 sentiment_analyzer_url = os.getenv('sentiment_analyzer_url',
                                    default="http://localhost:5050/")
 
+
 def searchcars_request(endpoint, **kwargs):
     params = ""
     if (kwargs):
@@ -28,7 +29,8 @@ def searchcars_request(endpoint, **kwargs):
         # Call get method of requests library with URL and parameters
         response = requests.get(request_url)
         return response.json()
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         # If any error occurs
         print("Network exception occurred")
     finally:
